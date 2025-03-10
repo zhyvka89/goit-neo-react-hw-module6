@@ -1,8 +1,15 @@
 import { useId } from "react";
+import { useDispatch } from "react-redux";
+import { changeFilter } from "../../redux/filterSlice";
 import { filter_wrapper, filter_input } from "./SearchBox.module.css";
 
-function SearchBox({ value, searchContact }) {
+function SearchBox() {
   const filterId = useId();
+  const dispatch = useDispatch();
+
+  function searchContact(value) {
+    dispatch(changeFilter(value));
+  }
 
   return (
     <div className={filter_wrapper}>
@@ -12,7 +19,6 @@ function SearchBox({ value, searchContact }) {
         type="text"
         name="filter"
         id={filterId}
-        value={value}
         onChange={(e) => searchContact(e.target.value)}
       />
     </div>
